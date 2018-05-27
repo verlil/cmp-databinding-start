@@ -1,15 +1,27 @@
 <div class="container">
-  <app-cockpit
-  (serverCreated)="onServerAdded($event)"
-  (blueprintCreated)="onBlueprintAdded($event)"
-  ></app-cockpit>
+
   <div class="row">
-    <div class="col-xs-12">
+    <div class="col-12 my-2">
+      <app-cockpit
+      (serverCreated)="onServerAdded($event)"
+      (blueprintCreated)="onBlueprintAdded($event)"
+      ></app-cockpit>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 my-2">
+      <div class="btn-group">
+        <button class="btn btn-outline-warning" (click)="onChangeFirst()">Change first element</button>
+        <button class="btn btn-outline-danger" (click)="onDeleteFirst()">Delete first element</button>
+      </div>
       <app-server-element
       *ngFor="let serverElement of serverElements"
-      [element]="serverElement">
+      [element]="serverElement"
+      [name]="serverElement.name">
       hello
     </app-server-element>
     </div>
   </div>
+
 </div>
