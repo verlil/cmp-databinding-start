@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, ViewChild, ElementRef, ContentChild } from '@angular/core';
 
 @Component({
   selector: 'app-server-element',
@@ -9,14 +9,18 @@ import { Component, OnInit, Input, ViewEncapsulation, OnChanges, SimpleChanges, 
 export class ServerElementComponent implements OnInit, OnChanges {
   @Input() element: {type: string, name: string, content: string};//curly brackets define that this is a JS object, this is a TS syntax
   @Input() name: string;
-  @ViewChild('heading') header: ElementRef;
+  @ViewChild('heading') text: ElementRef;
+  @ContentChild('contentParagraph') content: ElementRef;
 
   constructor() {
     console.log('constructor');
+    console.log('Text from app.component', this.content.nativeElement.textContent);
    }
 
   ngOnInit() {
-    console.log('ngOnInit "', this.header.nativeElement.textContent, '"');
+    console.log('ngOnInit "', this.text.nativeElement.textContent, '"');
+    console.log(this.text);
+    console.log('Text from app.component', this.content.nativeElement.textContent);
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -29,6 +33,7 @@ export class ServerElementComponent implements OnInit, OnChanges {
 
   ngAfterContentInit(){
     console.log('ngAfterContentInit');
+    console.log('Text from app.component', this.content.nativeElement.textContent);
   }
 
   ngAfterContentChecked(){
@@ -36,7 +41,7 @@ export class ServerElementComponent implements OnInit, OnChanges {
   }
 
   ngAfterViewInit(){
-    console.log('ngAfterViewInit "', this.header.nativeElement.textContent, '"');
+    console.log('ngAfterViewInit "', this.text.nativeElement.textContent, '"');
   }
 
   ngAfterViewChecked(){
@@ -45,7 +50,6 @@ export class ServerElementComponent implements OnInit, OnChanges {
 
   ngOnDestroy(){
     console.log('ngOnDestroy');
-    console.log(this.header);
   }
 
 }
